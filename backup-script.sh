@@ -1,4 +1,5 @@
 #!/bin/bash
+#Odoo 8
 FTP_SERVER=XXX.XXX.XXX.XXX
 FTP_USER=username
 FTP_PASSWORD="ftp_password"
