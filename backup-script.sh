@@ -1,18 +1,19 @@
 #!/bin/bash
+#Odoo 11
 FTP_SERVER=XXX.XXX.XXX.XXX
 FTP_USER=username
 FTP_PASSWORD="ftp_password"
 ADMIN_PASSWORD="admin_db_password"
-FILE_PASSWORD="zip_file_password"
+FILE_PASSWORD="zip_password"
 
 BCK_FOLDER=/odoo/backups
 LOG=/root/backup.log
 TIMESTAMP=`date +%Y-%m-%d_%H-%M-%S`
-MODULE_PATH=/usr/lib/python2.7/dist-packages/openerp/addons
+MODULE_PATH=/usr/lib/python3/dist-packages/odoo/addons/
 BACKUP_MODULE_FILE=/odoo/backups/modules-${TIMESTAMP}.tar.gz
 DATA_FOLDER=/var/lib/odoo
 DATA_FOLDER_FILE=/odoo/backups/data-${TIMESTAMP}.tar.gz
-ODOO_DATABASES="SYS"
+ODOO_DATABASES="od11"
 
 RECIPIENT=monitoring@xxxx.com
 SENDER="backup@xxxx.com"
@@ -26,10 +27,9 @@ tar -czvf ${DATA_FOLDER_FILE} ${DATA_FOLDER}
 for DB in ${ODOO_DATABASES}
 do
 curl -X POST \
-    -F "backup_pwd=${ADMIN_PASSWORD}" \
-    -F "backup_db=${DB}" \
+    -F "master_pwd=${ADMIN_PASSWORD}" \
+    -F "name=${DB}" \
     -F "backup_format=zip" \
-    -F "token=" \
     -o ${BCK_FOLDER}/${DB}.${TIMESTAMP}.zip \
     http://localhost:8069/web/database/backup
 7z a -p${FILE_PASSWORD} -y ${BCK_FOLDER}/${DB}.${TIMESTAMP}.zip.7z ${BCK_FOLDER}/${DB}.${TIMESTAMP}.zip > ${LOG}
@@ -55,4 +55,3 @@ rm -rf ${BACKUP_MODULE_FILE}
 rm -rf ${DATA_FOLDER_FILE}
 
 mail -r ${SENDER} -s $SUBJECT ${RECIPIENT} < ${LOG}
-
