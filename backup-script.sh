@@ -5,9 +5,9 @@ FTP_USER=username
 FTP_PASSWORD="ftp_password"
 ADMIN_PASSWORD="admin_db_password"
 FILE_PASSWORD="zip_password"
-
 BCK_FOLDER=/odoo/backups
 LOG=/root/backup.log
+
 TIMESTAMP=`date +%Y-%m-%d_%H-%M-%S`
 MODULE_PATH=/usr/lib/python3/dist-packages/odoo/addons/
 BACKUP_MODULE_FILE=/odoo/backups/modules-${TIMESTAMP}.tar.gz
