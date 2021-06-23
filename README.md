@@ -13,4 +13,3 @@ FILE_PASSWORD="zip_password"
 BCK_FOLDER=/odoo/backups
 LOG=/root/backup.log
 </pre>
- 
