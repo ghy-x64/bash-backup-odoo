@@ -91,7 +91,7 @@ for ((FNO=0; FNO<${#lista[@]}; FNO+=9));do
   # echo Date ${lista[`expr $FNO+5`]} ${lista[`expr $FNO+6`]}          File: ${lista[`expr $FNO+8`]}
 
   # check the date stamp
-  if [ "${lista[`expr $FNO+5`]}"="$MM" ];
+  if [ "${lista[`expr $FNO+5`]}" = "$MM" ];
   then
     if [[ $DD == 0* ]]; then DD="${DD:1}"; else DD=$DD; fi
     if [[ ${lista[`expr $FNO+6`]} -lt $DD ]];
